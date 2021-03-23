@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule ^index index.php
+
+AddHandler application/x-httpd-php .htm .html

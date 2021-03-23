@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>Release Dashboard</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+		<script src="javaScriptCode.js"></script>
+				
+		<script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+		<script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+		
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		
+		<script>
+			$( function() {
+			$( "#dateStart" ).datepicker();
+			$( "#dateEnd" ).datepicker();
+			} );
+		</script>
+</head>
+<body onload="onLoadFunction();" style="background-color:#DFF2FD;">	
+	<div>
+		<img src="logo.jpg" height="100px">
+		<table class="table">
+			<tr>
+				<td align="center"><em>Start Date of Execution&nbsp;</em><input type="date" id="dateStart" onchange="radioBtnReset(3);"/></td>
+				<td align="center"><input type=button name="reloadPage" value="Reload Page" class="btn btn-outline-warning" onclick="location.reload(true)"/></td>
+				<td align="center"><em>End Date of Execution&nbsp;</em><input type="date" id="dateEnd" onchange="radioBtnReset(3);"/></td>
+			</tr>
+			<tr>
+				<td align="center" colspan=3>
+					<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons" >	
+						<label class="btn btn-outline-primary" onclick="selectDate();radioBtnStatusReset();" id="lbl5">
+							<input type="radio" name="dateFilter" id="SelectDate" value="SelectDate"/> Select Date
+						</label>
+						<label class="btn btn-outline-danger active" onclick="allFilterReset(0)" id="lbl6">
+							<input type="radio" name="dateFilter" id="ClearAllFilters" value="ClearAllFilters"/> Clear All Filters
+						</label>
+						<label class="btn btn-outline-success" onclick="selectDateRange();radioBtnStatusReset();" id="lbl7">
+							<input type="radio" name="dateFilter" id="SelectDateRange" value="SelectDateRange"/> Select Date Range
+						</label>
+					</div>
+				</td>
+			</tr>		
+		</table>
+	</div>
+	<br/>
+	<div style="width:100%; height:200px; background-color:#DFF2FD;">
+		<div id="statusPieChartContainer" style="width:50%; float:left; height:200px; background-color:#DFF2FD;"></div>
+		<div id="numExecPieChartContainer" style="width:50%; float:right; height:200px; background-color:#DFF2FD;"></div>
+	</div>
+	<br/>
+	<div>
+		<table class="table">
+			<tr>
+				<td>				
+					<div id="execNameDiv" class="form-group"> </div>
+				</td>
+				<td>
+					<div class="btn-group btn-group-toggle btn-block" data-toggle="buttons" id="statusDiv">		
+						<label class="btn btn-outline-primary" onclick="showAllPlans()" id="lbl1">
+							<input type="radio" name="statusFilter" id="ShowAllPlans" value="ShowAllPlans"/> Show All Plans
+						</label>
+						<label class="btn btn-outline-success" onclick="showPassedPlans()" id="lbl2">
+							<input type="radio" name="statusFilter" id="PassedPlans" value="PassedPlans"/> Passed Plans
+						</label>
+						<label class="btn btn-outline-danger" onclick="showFailedPlans()" id="lbl3">
+							<input type="radio" name="statusFilter" id="FailedPlans" value="FailedPlans"/> Failed Plans
+						</label>
+						<label class="btn btn-outline-warning" onclick="showOtherPlans()" id="lbl4">
+							<input type="radio" name="statusFilter" id="OtherStatus" value="OtherStatus"/> Other Status
+						</label>
+					</div>				
+				</td>
+			</tr>		
+		</table>
+	</div>	
+	<div id="contentTable"> </div>	
+</body>
+</html>
